@@ -27,7 +27,7 @@
         return fetch(input, init);
     }
 
-    exports.Fetcher = {
+    exports.Fetchex = {
         fetch:(input, init) => {
             return fetch(input, init);
         },

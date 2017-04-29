@@ -1,14 +1,14 @@
 {
-  "name": "fetcher",
+  "name": "fetchex",
   "version": "1.0.0",
   "description": "Simple wrapper library over the JS fetch API with sensible defaults",
-  "main": "fetcher.js",
+  "main": "fetchex.js",
   "scripts": {
     "test": "test"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zeeskhan1990/fetcher.git"
+    "url": "git+https://github.com/zeeskhan1990/fetchex.git"
   },
   "keywords": [
     "fetch",
@@ -17,7 +17,7 @@
   "author": "Zeeshan Khan <zeeskhan1990@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/zeeskhan1990/fetcher/issues"
+    "url": "https://github.com/zeeskhan1990/fetchex/issues"
   },
-  "homepage": "https://github.com/zeeskhan1990/fetcher#readme"
+  "homepage": "https://github.com/zeeskhan1990/fetchex#readme"
 }
