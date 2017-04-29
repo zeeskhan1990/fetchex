@@ -1,0 +1,23 @@
+{
+  "name": "fetcher",
+  "version": "1.0.0",
+  "description": "Simple wrapper library over the JS fetch API with sensible defaults",
+  "main": "fetcher.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zeeskhan1990/fetcher.git"
+  },
+  "keywords": [
+    "fetch",
+    "react-native"
+  ],
+  "author": "Zeeshan Khan <zeeskhan1990@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zeeskhan1990/fetcher/issues"
+  },
+  "homepage": "https://github.com/zeeskhan1990/fetcher#readme"
+}
