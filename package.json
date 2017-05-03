@@ -1,6 +1,6 @@
 {
   "name": "fetchex",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Simple wrapper library over the JS fetch API with sensible defaults",
   "main": "./lib/fetchex.js",
   "scripts": {
