@@ -7,25 +7,20 @@ const types = {
     text: 'text/plain'
 };
 
-const wrapFetch = (method, url, contentType='json', accept='json', creds, init, body) => {
-    if (typeof(body) === 'undefined' && method !== 'GET') throw 'body is required';
-    if (typeof(body) === 'undefined' && method !== 'GET') throw 'type is required';
+const wrapFetch = (method, url, accept='json', contentType='json', init, body) => {
 
     init = init || {};
-    if (method !== 'GET')
-        init.body = body;
     init.method = method;
     init.headers = init.headers || {};
-    init.headers['Content-Type'] = types[contentType] || contentType;
-    // if (accept === 'json')
     init.headers['Accept'] = types[accept] || accept;
-
-    if (creds === true)
-        init.credentials = 'same-origin';
-    else if (typeof(creds) !== 'undefined')
-        init.credentials = creds;
-
-    return fetch(url, init);
+    init.headers['Content-Type'] = types[contentType] || contentType;
+    if (typeof body !== 'undefined')
+        init.body = body;
+    const fetchPromise = fetch(url, init);
+    if (types.hasOwnProperty(accept))
+        return fetchPromise.then((response) => extractResponse(response, accept));
+    else
+        return fetchPromise;
 }
 
 const extractResponse = (rawResponse, type) => {
@@ -39,62 +34,25 @@ const fetchex = {
         return fetch(url, init);
     },
 
-    get:(url, contentType, accept, creds, init) => {
-        return wrapFetch('GET', url, contentType, accept, creds, init);
+    get:(url,accept, contentType, init) => {
+        return wrapFetch('GET', url, accept, contentType, init)
     },
 
-    post:(url, body, contentType, accept, creds, init) => {
-        return wrapFetch('POST', url, contentType, accept, creds, init, body);
+    post:(url, body, accept, contentType, init) => {
+        return wrapFetch('POST', url, accept, contentType, init, body);
     },
 
-    patch:(url, body, contentType, accept, creds, init) => {
-        return wrapFetch('PATCH', url, contentType, accept, creds, init, body);
+    patch:(url, body, accept, contentType, init) => {
+        return wrapFetch('PATCH', url, accept, contentType, init, body);
     },
 
-    getJson: (url, contentType, creds, init) => {
-         return wrapFetch('GET', url, contentType, 'json', creds, init)
-         .then((response) => extractResponse(response, 'json'));
+    put:(url, body, accept, contentType, init) => {
+        return wrapFetch('PUT', url, accept, contentType, init, body);
     },
 
-    postJson: (url, body, contentType, creds, init) => {
-        return wrapFetch('POST', url, contentType, 'json', creds, init, body)
-        .then((response) => extractResponse(response, 'json'));
-    },
-
-    patchJson: (url, body, contentType, creds, init) => {
-        return wrapFetch('PATCH', url, contentType, 'json', creds, init, body)
-        .then((response) => extractResponse(response, 'json'));
-    },
-
-    getFile: (url, contentType, creds, init) => {
-        return wrapFetch('GET', url, contentType, 'file', creds, init)
-        .then((response) => extractResponse(response, 'file'));
-    },
-
-    postFile: (url, body, contentType, creds, init) => {
-        return wrapFetch('POST', url, contentType, 'file', creds, init, body)
-        .then((response) => extractResponse(response, 'file'));
-    },
-
-    patchFile: (url, body, contentType, creds, init) => {
-        return wrapFetch('POST', url, contentType, 'file', creds, init, body)
-        .then((response) => extractResponse(response, 'file'));
-    },
-
-    getText: (url, contentType, creds, init) => {
-        return wrapFetch('GET', url, contentType, 'text', creds, init)
-        .then((response) => extractResponse(response, 'text'));
-    },
-
-    postText: (url, body, contentType, creds, init) => {
-        return wrapFetch('GET', url, contentType, 'text', creds, init, body)
-        .then((response) => extractResponse(response, 'text'));
-    },
-
-    patchText: (url, body, contentType, creds, init) => {
-        return wrapFetch('GET', url, contentType, 'text', creds, init, body)
-        .then((response) => extractResponse(response, 'text'));
-    },
+    delete:(url, body, accept, contentType, init) => {
+        return wrapFetch('DELETE', url, accept, contentType, init, body);
+    }
 };
 
 export default fetchex
